@@ -1,17 +1,18 @@
 package com.g2a.playwright.pages;
 
+import com.g2a.playwright.framework.ScreenshotHelper;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.regex.Pattern;
-
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.await;
 
 @Slf4j
 public class ProductDetailsPage extends BasePage {
 
-  private final Pattern productDetailsURLPattern = Pattern.compile("search\\?query");
   Locator productPrice = page.locator("div[data-locator='product-info']").locator("span[data-locator='zth-price']").first();
   Locator addToCartButton = page.locator("div[data-locator='product-info']").locator("button[data-locator='ppa-payment__btn']");
   Locator availableInAnAccountPopup = page.locator("div[data-test-id='dialog-content']");
@@ -22,25 +23,32 @@ public class ProductDetailsPage extends BasePage {
   }
 
   @Override
+  @Step("Check if product details page is displayed")
   public boolean isAt() {
+    await("Wait for product page").atMost(5, SECONDS).until(() -> productPrice.isVisible());
     return productPrice.isVisible();
   }
 
+  @Step("Get product price")
   public String getPrice() {
     log.info("Getting item price");
+    ScreenshotHelper.takeScreenshot(page);
     String price = productPrice.textContent();
     log.info("Price is: {}", price);
     return price;
   }
 
+  @Step("Click Add to Cart button")
   public void clickAddToCart() {
     log.info("Clicking Add to Cart button");
+    ScreenshotHelper.takeScreenshot(page);
     page.waitForTimeout(100);
     assertThat(addToCartButton).isVisible();
     addToCartButton.focus();
     addToCartButton.click();
     if (availableInAnAccountPopup.isVisible()) {
       assertThat(addToCartButtonInAvailableInAnAccountPopup).isVisible();
+      ScreenshotHelper.takeScreenshot(page);
       addToCartButtonInAvailableInAnAccountPopup.click();
     }
   }
