@@ -7,7 +7,7 @@
 - Allure report
 - Docker
 
-To run tests (default search text = diablo 4 pc, assasins | default browser = chrome):
+To run tests (default search text = diablo 4 PC | default browser = chrome):
 
 - mvn test
 
