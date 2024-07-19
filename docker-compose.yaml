@@ -1,0 +1,25 @@
+services:
+  playwright-test:
+    image: playwright-java-image
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: /bin/sh -c "echo 'Starting test for $SEARCH_TEXT' && ./run-tests.sh '$SEARCH_TEXT' && echo 'Test finished'"
+    environment:
+      SEARCH_TEXT: "${SEARCH_TEXT}"
+    volumes:
+      - ./allure-results/:/tests/allure-results
+    restart: "no"
+  allure:
+    depends_on:
+      playwright-test:
+        condition: service_completed_successfully
+    image: "frankescobar/allure-docker-service"
+    environment:
+      CHECK_RESULTS_EVERY_SECONDS: 5
+      KEEP_HISTORY: 1
+    ports:
+      - "5050:5050"
+    volumes:
+      - ${PWD}/allure-results:/app/allure-results
+      - ${PWD}/allure-reports:/app/default-reports

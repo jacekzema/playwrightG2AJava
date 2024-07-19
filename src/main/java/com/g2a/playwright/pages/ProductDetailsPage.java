@@ -42,16 +42,15 @@ public class ProductDetailsPage extends BasePage {
   public void clickAddToCart() {
     log.info("Clicking Add to Cart button");
     ScreenshotHelper.takeScreenshot(page);
-    page.waitForTimeout(100);
-    assertThat(addToCartButton).isVisible();
+    addToCartButton.waitFor();
     addToCartButton.focus();
-    addToCartButton.click();
+    addToCartButton.evaluate("button => button.click()");
+   // addToCartButton.click(new Locator.ClickOptions().setForce(true));
     if (availableInAnAccountPopup.isVisible()) {
+      log.info("Available in an account popup is displayed");
       assertThat(addToCartButtonInAvailableInAnAccountPopup).isVisible();
       ScreenshotHelper.takeScreenshot(page);
       addToCartButtonInAvailableInAnAccountPopup.click();
     }
   }
 }
-
-

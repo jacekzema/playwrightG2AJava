@@ -1,10 +1,11 @@
 # playwrightG2AJava
 
-Precondition (installed):
+### Precondition (installed):
 
 - Java
 - Maven
 - Allure report
+- Docker
 
 To run tests (default search text = diablo 4 pc, assasins | default browser = chrome):
 
@@ -22,5 +23,18 @@ To run tests in headless mode (true / false - false is default):
 
 - mvn test -DHEADLESS=true
 
-DOCKER TIME!
+To create allure report run:
+
+ - allure report
+ - allure open
+
+### How to run on docker?
+
+Headless mode in docker compose CLI run:
+
+ - SEARCH_TEXT='assasins,diablo 4 pc' docker-compose up --build
+
+Report will be available in:
+    
+- ./allure-reports/latest 
 

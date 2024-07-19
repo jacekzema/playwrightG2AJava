@@ -49,5 +49,3 @@ class CartTest extends BaseTest {
     Assertions.assertEquals(expectedProductPrice, totalProductPrice, "Prices are not equal");
   }
 }
-
-

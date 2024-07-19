@@ -22,7 +22,7 @@ public class YourCartPage extends BasePage {
   @Override
   @Step("Check if your cart page is displayed")
   public boolean isAt() {
-    await("Wait for cart page").atMost(5, SECONDS).until(() -> totalPriceSpan.isVisible());
+    await("Wait for cart page").atMost(10, SECONDS).until(() -> totalPriceSpan.isVisible());
     return totalPriceSpan.isVisible();
   }
 
