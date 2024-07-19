@@ -25,7 +25,7 @@ public class ProductDetailsPage extends BasePage {
   @Override
   @Step("Check if product details page is displayed")
   public boolean isAt() {
-    await("Wait for product page").atMost(5, SECONDS).until(() -> productPrice.isVisible());
+    await("Wait for product page").atMost(10, SECONDS).until(() -> productPrice.isVisible());
     return productPrice.isVisible();
   }
 

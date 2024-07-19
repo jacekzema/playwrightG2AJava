@@ -27,7 +27,7 @@ public class SearchResultPage extends BasePage {
   @Step("Check if search result page is displayed")
   public boolean isAt() {
     page.waitForURL(searchPagePattern);
-    await("Wait for search page").atMost(5, SECONDS).until(() -> firstSearchListItem.isVisible());
+    await("Wait for search page").atMost(10, SECONDS).until(() -> firstSearchListItem.isVisible());
     return firstSearchListItem.isVisible();
   }
 

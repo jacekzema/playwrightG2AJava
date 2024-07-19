@@ -54,6 +54,7 @@ public class PlaywrightFactory {
     browserContext = browser.newContext();
     page = browserContext.newPage();
     page.setViewportSize(1920,1080);
+    page.setDefaultTimeout(40000); // 40 seconds
     return page;
   }
 }

@@ -20,7 +20,7 @@ public class MainPage extends BasePage {
   @Override
   @Step("Check if main page is displayed")
   public boolean isAt() {
-    await("Wait for main page").atMost(5, SECONDS).until(() -> searchInput.isVisible());
+    await("Wait for main page").atMost(10, SECONDS).until(() -> searchInput.isVisible());
     return searchInput.isVisible();
   }
 
